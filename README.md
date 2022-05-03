@@ -37,13 +37,13 @@ git clone git@github.com:Sennovate-Inc/forgerock-ansible-playbook.git
 ```
 2. Switch to Repository Directory
 ```
-$ cd forgerock-ansible-playbook
+cd forgerock-ansible-playbook
 ```
 3. Execute Ansible script
 ```
-$ ansible-playbook playbook.yaml
+ansible-playbook playbook.yaml
 ```
-4. Access the server using the FQDN
+4. Access the server using the FQDN(Fully qualified domain name)
 ```
 http://FQDN 
 ```
