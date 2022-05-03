@@ -12,19 +12,19 @@ A public fork of Sennovate's internal Ansible playbook to set up ForgeRock AM fo
 </p>
 
 ## Description
-This playbook aims to help build test and development environments for ForgeRock AM through an ansible playbook in order to reduce the deployment time.
+This playbook aims to help build test and development environments for ForgeRock AM through an ansible playbook in order to reduce deployment time.
+
+## Prerequisites
+
+- Ansible
+- Ubuntu 18.04 and above
+- Root access to run the script
 
 ## Installation
 
 ForgeRock ansible playbook requires ansible to be installed and running the `playbook.yaml` will automatically check requirements, download libraries and packages to install the ForgeRock AM 7.1.
 
 To run a specific version of ForgeRock AM, update the vars.yaml with the specific ForgeRock AM version.
-
-### Prerequisites
-
-- Ansible
-- Ubuntu 18.04 and above
-- Root access to run the script
 
 To run the playbook and install ForgeRock AM, follow the steps below:
 
@@ -47,7 +47,11 @@ http://FQDN
 
 ## Usage
 
-With this Ansible playbook you can now run and develop test environments to build POCs and get up and running with ForgeRock AM in 2 minutes!
+With this Ansible playbook you can now run and develop test environments to build POCs and get up and running with ForgeRock AM in just 2 minutes!
+
+Default Installation version: `7.1.2 (latest)`
+
+Versions supported: `7.1.2 and 7.1.1`
 
 ## Support
 
