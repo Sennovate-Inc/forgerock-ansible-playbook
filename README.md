@@ -64,7 +64,7 @@ For any issues during installation, raise an issue.
 
 ## Roadmap
 
-This functionality will also be available with Single click deployment through [Sennovate+](https://www.plus.sennovate.com). Stay tuned for more updates and follow us on our Sennovate for latest updates. 👀 
+This functionality will also be available with Single click deployment through [Sennovate+](https://www.plus.sennovate.com). Stay tuned for more updates and follow us on our [social handles](https://linktr.ee/sennovate) for latest updates. 👀 
 
 ## Contributing
 
