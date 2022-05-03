@@ -9,6 +9,9 @@ A public fork of Sennovate's internal Ansible playbook to set up ForgeRock AM fo
   <a href="https://twitter.com/Sennovate" target="_blank">
     <img src="https://img.shields.io/twitter/follow/Sennovate.svg?logo=twitter">
     </a>
+  <a href="https://plus.sennovate.com?utm_source=gh" target="_blank">
+    <img src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2FSennovate-Inc%2Fforgerock-ansible-playbook&count_bg=%2379C83D&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=Visits&edge_flat=false">
+    </a>
 </p>
 
 ## Description
