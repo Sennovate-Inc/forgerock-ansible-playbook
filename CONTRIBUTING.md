@@ -4,13 +4,11 @@
 
 ### Contributions we are looking for.
 
-GluuLog4jScanner is a free and open source tool that is build to help the community by providing them the ability to scan,backup and patch their systems from log4shell vulnerability.
+ForgeRock Ansible Playbook is a public fork of Sennovate ansible playbook to automate installation of ForgeRock AM
 
-The patch script is available from the [official](https://github.com/GluuFederation/Log4J) Gluu log4j patch.
+You can contribute to the project and help improve it so it is available for a wider audience and supports more versions of ForgeRock and other ForgeRock Products.
 
-You can contribute to the project and help improve it so it is available for a wider audience and also helps in securing Gluu servers.
-
-You can improve the Readme,suggest an improvement in the issues and submit PRs,feature requests.
+You can improve the README,suggest an improvement in the issues and submit PRs.
 
 ### Pull Requests
 
