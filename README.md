@@ -45,7 +45,7 @@ ansible-playbook playbook.yaml
 ```
 4. Access the server using the FQDN(Fully qualified domain name)
 ```
-http://FQDN 
+http://{FQDN} 
 ```
 
 ## Usage
