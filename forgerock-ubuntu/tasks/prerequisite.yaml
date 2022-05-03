@@ -1,0 +1,24 @@
+#####################
+# Prerequisite Tasks
+#####################
+---
+- name: Prerequisite
+  block:
+
+  # Update Ubuntu
+  - name: Update Ubuntu
+    apt:
+      name: '*'
+      state: latest
+      update_cache: yes
+      force_apt_get: yes
+
+  # Install Prerequisite Packages 
+  - name: Install Prerequisite Packages
+    apt:
+      name: ['wget', 'unzip']
+      state: latest
+  
+  rescue:
+  - fail:
+      msg: "One or More Prerequisite Setup Failed. Abort."

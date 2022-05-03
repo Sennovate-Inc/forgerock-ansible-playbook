@@ -1,0 +1,54 @@
+#################################################################
+# Install Forgerock Access Management {{ FORGEROCK_AM_VERSION }}
+#################################################################
+---
+- name: Install Forgerock Access Management {{ FORGEROCK_AM_VERSION }}
+  block:
+
+  # Download Forgerock Access Management {{ FORGEROCK_AM_VERSION }}
+  - name: Download Forgerock Access Management {{ FORGEROCK_AM_VERSION }}
+    get_url: 
+      url: https://sennovate-downloads.s3.us-east-2.amazonaws.com/Packages/Forgerock/AccessManagement/{{ FORGEROCK_AM_VERSION }}/AM-{{ FORGEROCK_AM_VERSION }}.zip
+      dest: /tmp/AM-{{ FORGEROCK_AM_VERSION }}.zip
+      mode: '0444'
+      force: yes
+  
+  # Unzip Forgerock Access Management {{ FORGEROCK_AM_VERSION }}
+  - name: Unzip Forgerock Access Management {{ FORGEROCK_AM_VERSION }}
+    unarchive:
+      src: /tmp/AM-{{ FORGEROCK_AM_VERSION }}.zip
+      dest: /tmp/
+      remote_src: yes
+  
+  # Deploy Forgerock Access Management {{ FORGEROCK_AM_VERSION }}
+  - name: Deploy Access Management {{ FORGEROCK_AM_VERSION }}
+    copy:
+      src: /tmp/openam/AM-{{ FORGEROCK_AM_VERSION }}.war
+      dest: /var/lib/tomcat9/webapps/openam.war
+      remote_src: yes
+  
+  rescue:
+
+  # UnDeploy Forgerock Access Management {{ FORGEROCK_AM_VERSION }}
+  - name: UnDeploy Forgerock Access Management {{ FORGEROCK_AM_VERSION }}
+    file:
+      path: "{{ item }}"
+      state: absent
+    with_items:
+      - /var/lib/tomcat9/webapps/openam.war
+      - /var/lib/tomcat9/webapps/openam
+      - /var/lib/tomcat9/webdata/openam
+  
+  - fail:
+      msg: "Unable to Install Forgerock Access Management {{ FORGEROCK_AM_VERSION }}. Rolling Back."
+
+  always:
+  
+  # Clean Up Forgerock Access Management {{ FORGEROCK_AM_VERSION }} Downloads
+  - name: Clean Up Forgerock Access Management {{ FORGEROCK_AM_VERSION }} Downloads
+    file:
+      path: "{{ item }}"
+      state: absent
+    with_items:
+      - /tmp/AM-{{ FORGEROCK_AM_VERSION }}.zip
+      - /tmp/openam

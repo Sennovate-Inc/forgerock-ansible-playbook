@@ -1,0 +1,25 @@
+#############################
+# Nginx OpenAM Configuration
+#############################
+
+upstream backend {
+    server 127.0.0.1:8080 max_fails=2 fail_timeout=30s;
+}
+
+server {
+    listen 80 default_server;
+    server_name _;
+
+    location / {
+        rewrite ^/(.*)$ http://$host/openam/$1 redirect;
+    }
+
+    location /openam {
+        proxy_buffering     off;
+        proxy_set_header    Host $host;
+        proxy_set_header    X-Real-IP $remote_addr;
+        proxy_set_header    X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header    X-Forwarded-Proto $scheme;
+        proxy_pass          http://backend;
+    }
+}

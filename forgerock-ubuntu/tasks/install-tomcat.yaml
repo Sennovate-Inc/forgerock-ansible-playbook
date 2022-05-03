@@ -1,0 +1,88 @@
+#####################################
+# Install & Configure Apache tomcat9
+#####################################
+---
+- name: Install & Configure Apache tomcat9
+  block:
+
+  # Install Apache tomcat9
+  - name: Install Apache tomcat9
+    apt:
+      name: ['tomcat9', 'tomcat9-common']
+      state: latest
+    notify:
+      - Enable & Restart Apache tomcat9 Service
+
+  # Create Apache tomcat9 Webdata Directory
+  - name: Create Apache tomcat9 Webdata Directory
+    file:
+      path: /var/lib/tomcat9/webdata
+      state: directory
+      owner: tomcat
+      group: tomcat
+      mode: '0755'
+
+  # Fetch Apache tomcat9 User ID
+  - name: Fetch Apache tomcat9 User ID
+    getent:
+      database: passwd
+      key: tomcat
+    register: TOMCAT_USER
+
+  # Patch Apache tomcat9 User Home Directory
+  - name: Patch Apache tomcat9 User Home Directory
+    replace:
+      path: /etc/passwd
+      regexp: "^tomcat:(.*)"
+      replace: "tomcat:x:{{ TOMCAT_USER.ansible_facts.getent_passwd.tomcat[1] }}:{{ TOMCAT_USER.ansible_facts.getent_passwd.tomcat[1] }}:Apache Tomcat:/var/lib/tomcat9/webdata/:/sbin/nologin"
+    notify:
+      - Enable & Restart Apache tomcat9 Service
+
+  # Patch Apache tomcat9 Service
+  - name: Patch Apache tomcat9 Service
+    lineinfile:
+      path: /lib/systemd/system/tomcat9.service
+      insertafter: '^ReadWritePaths'
+      line: 'ReadWritePaths=/var/lib/tomcat9/webdata/'
+    notify:
+      - Enable & Restart Apache tomcat9 Service
+
+  # Flush Handlers
+  - name: Flush Handlers
+    meta: flush_handlers
+
+  rescue:
+
+  # Stop Apache tomcat9 Service
+  - name: Stop Apache tomcat9 Service
+    systemd:
+      name: tomcat9
+      state: stopped
+      enabled: no
+    ignore_errors: yes
+  
+  # Remove Apache tomcat9
+  - name: Remove Apache tomcat9
+    apt:
+      name: ['tomcat9', 'tomcat9-common']
+      state: absent
+      purge: yes
+    ignore_errors: yes
+  
+  # Remove Apache tomcat9 Webdata Directory
+  - name: Remove Apache tomcat9 Webdata Directory
+    file:
+      path: /var/lib/tomcat9/webdata
+      state: directory
+    ignore_errors: yes
+  
+  # Remove Apache tomcat9 User
+  - name: Remove Apache tomcat9 User
+    user:
+      name: tomcat
+      state: absent
+      remove: yes
+    ignore_errors: yes
+  
+  - fail:
+      msg: "Apache tomcat9 Installation & Configuration Failed. Rolling Back."

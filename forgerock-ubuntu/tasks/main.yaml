@@ -1,0 +1,19 @@
+##################################
+# tasks file for forgerock-ubuntu
+##################################
+---
+# Prerequisite
+- name: Prerequisite
+  include: prerequisite.yaml
+
+# Install & Configure Apache tomcat9
+- name: Install & Configure Apache tomcat9
+  include: install-tomcat.yaml
+
+# Install Forgerock Access Management {{ FORGEROCK_AM_VERSION }}
+- name: Install Forgerock Access Management {{ FORGEROCK_AM_VERSION }}
+  include: install-am.yaml
+
+# Install & Configure Nginx Reverse Proxy
+- name: Install & Configure Nginx Reverse Proxy
+  include: install-nginx.yaml

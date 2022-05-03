@@ -1,0 +1,60 @@
+##########################################
+# Install & Configure Nginx Reverse Proxy
+##########################################
+---
+- name: Install & Configure Nginx Reverse Proxy
+  block:
+
+  # Install Nginx Package
+  - name: Install Nginx Package
+    apt:
+      name: 'nginx'
+      state: latest
+    notify: 
+      - Enable & Restart Nginx Service
+  
+  # BackUp Nginx Original Configuration
+  - name: BackUp Nginx Original Configuration
+    copy:
+      src: /etc/nginx/nginx.conf
+      dest: /etc/nginx/nginx.conf.bak
+      remote_src: yes
+
+  # Configure Nginx Reverse Proxy
+  - name: Configure Nginx Reverse Proxy
+    template:
+      src: "{{ item.src }}"
+      dest: "{{ item.dest }}"
+      owner: root
+      group: root
+      mode: '0644'
+    with_items:
+      - { src: nginx-conf.j2 , dest: /etc/nginx/nginx.conf }
+      - { src: nginx-openam-conf.j2 , dest: /etc/nginx/conf.d/openam.conf }
+    notify: 
+      - Enable & Restart Nginx Service
+  
+  # Flush Handlers
+  - name: Flush Handlers
+    meta: flush_handlers
+
+  rescue:
+
+  # Stop Nginx Service
+  - name: Stop Nginx Service
+    systemd:
+      name: nginx
+      state: stopped
+      enabled: no
+    ignore_errors: yes
+
+  # Remove Nginx Package
+  - name: Remove Nginx Package
+    apt:
+      name: ['nginx','nginx-common','nginx-core']
+      state: absent
+      purge: yes
+    ignore_errors: yes
+  
+  - fail:
+      msg: "Nginx Reverse Proxy Installation & Configuration Failed. Rolling Back."

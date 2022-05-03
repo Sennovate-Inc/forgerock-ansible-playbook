@@ -1,0 +1,9 @@
+#######################
+# Ansible Variable File
+#######################
+#
+# Supported Forgerock Access Management Version: 7.1.2
+#                                                7.1.1
+#
+# Forgerock Version
+FORGEROCK_AM_VERSION: 7.1.2
