@@ -33,7 +33,7 @@ To run the playbook and install ForgeRock AM, follow the steps below:
 
 1. Clone GitHub Repository
 ```
-git clone git@github.com:Sennovate-Inc/forgerock-ansible-playbook.git
+git clone https://github.com/Sennovate-Inc/forgerock-ansible-playbook.git
 ```
 2. Switch to Repository Directory
 ```
