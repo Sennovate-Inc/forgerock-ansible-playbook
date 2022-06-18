@@ -24,7 +24,7 @@
   - name: Deploy ForgeRock Access Management {{ FORGEROCK_AM_VERSION }}
     copy:
       src: /tmp/openam/AM-{{ FORGEROCK_AM_VERSION }}.war
-      dest: /var/lib/tomcat9/webapps/openam.war
+      dest: /var/lib/tomcat/webapps/openam.war
       remote_src: yes
   
   rescue:
@@ -35,9 +35,9 @@
       path: "{{ item }}"
       state: absent
     with_items:
-      - /var/lib/tomcat9/webapps/openam.war
-      - /var/lib/tomcat9/webapps/openam
-      - /var/lib/tomcat9/webdata/openam
+      - /var/lib/tomcat/webapps/openam.war
+      - /var/lib/tomcat/webapps/openam
+      - /usr/share/tomcat/openam
   
   - fail:
       msg: "Unable to Install ForgeRock Access Management {{ FORGEROCK_AM_VERSION }}. Rolling Back."

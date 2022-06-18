@@ -1,16 +1,23 @@
-##################
+###################
 # Ansible Playbook
-##################
+###################
 ---
-- name: Forgerock Setup
+- name: ForgeRock Setup
   hosts: local
   connection: local
   vars_files:
     - vars.yaml
   tasks:
-# Forgerock Setup - Ubuntu
-  - name: Forgerock Setup - Ubuntu
+
+# ForgeRock Setup - Ubuntu
+  - name: ForgeRock Setup - Ubuntu
     include_role:
       name: forgerock-ubuntu
     when: ansible_distribution == "Ubuntu" and ansible_distribution_version == "20.04" or
           ansible_distribution == "Ubuntu" and ansible_distribution_version == "18.04"
+
+# ForgeRock Setup - Amazon Linux 2
+  - name: ForgeRock Setup - Amazon Linux 2
+    include_role:
+      name: forgerock-amazon-linux
+    when: ansible_distribution == "Amazon" and ansible_distribution_version == "2"

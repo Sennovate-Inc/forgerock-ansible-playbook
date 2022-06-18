@@ -1,0 +1,23 @@
+#####################
+# Prerequisite Tasks
+#####################
+---
+- name: Prerequisite
+  block:
+
+  # Update Amazon Linux 2
+  - name: Update Amazon Linux 2
+    yum:
+      name: '*'
+      state: latest
+      update_cache: yes
+
+  # Install Prerequisite Packages 
+  - name: Install Prerequisite Packages
+    yum:
+      name: ['wget', 'unzip', 'curl']
+      state: latest
+  
+  rescue:
+  - fail:
+      msg: "One or More Prerequisite Setup Failed. Abort."

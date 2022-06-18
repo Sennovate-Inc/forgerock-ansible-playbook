@@ -1,6 +1,6 @@
-##################################
-# tasks file for forgerock-ubuntu
-##################################
+########################################
+# tasks file for forgerock-amazon-linux
+########################################
 ---
 # Prerequisite
 - name: Prerequisite

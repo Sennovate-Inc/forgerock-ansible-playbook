@@ -1,0 +1,19 @@
+###########################################
+# handlers file for forgerock-amazon-linux
+###########################################
+---
+# Enable & Restart Apache tomcat9 Service
+- name: Enable & Restart Apache tomcat9 Service
+  systemd:
+    name: tomcat
+    state: restarted
+    enabled: yes
+    daemon_reload: yes
+
+# Enable & Restart Nginx Service
+- name: Enable & Restart Nginx Service
+  systemd:
+    name: nginx
+    state: restarted
+    enabled: yes
+    daemon_reload: yes

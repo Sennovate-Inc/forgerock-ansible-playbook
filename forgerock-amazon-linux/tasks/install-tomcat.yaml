@@ -1,0 +1,38 @@
+#####################################
+# Install & Configure Apache tomcat9
+#####################################
+---
+- name: Install & Configure Apache tomcat9
+  block:
+
+  # Install amazon-linux-extras Apache tomcat9
+  - name: Install amazon-linux-extras Apache tomcat9
+    command: amazon-linux-extras install tomcat9 java-openjdk11 -y
+    register: TOMCAT_INSTALL_CHECK
+    notify:
+      - Enable & Restart Apache tomcat9 Service
+
+  # Flush Handlers
+  - name: Flush Handlers
+    meta: flush_handlers
+
+  rescue:
+
+  # Stop Apache tomcat9 Service
+  - name: Stop Apache tomcat9 Service
+    systemd:
+      name: tomcat
+      state: stopped
+      enabled: no
+    ignore_errors: yes
+  
+  # Remove Apache tomcat9
+  - name: Remove Apache tomcat9
+    yum:
+      name: ['tomcat', 'java-11-openjdk']
+      state: absent
+      autoremove: yes
+    ignore_errors: yes
+  
+  - fail:
+      msg: "Apache tomcat9 Installation & Configuration Failed. Rolling Back."
